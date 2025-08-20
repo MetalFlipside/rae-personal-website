@@ -9,16 +9,19 @@ import { ChevronDown, Mail, Linkedin, Instagram, ExternalLink, Briefcase, Gradua
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true)
   const [visibleSections, setVisibleSections] = useState<string[]>([])
+  const [loadingTexts, setLoadingTexts] = useState<{ [key: string]: string[] }>({})
+  const [bioWordsVisible, setBioWordsVisible] = useState(false)
 
   useEffect(() => {
-    // Simulate loading
     const timer = setTimeout(() => {
       setIsLoading(false)
-      // Stagger section animations
       const sections = ["hero", "about", "timeline"]
       sections.forEach((section, index) => {
         setTimeout(() => {
           setVisibleSections((prev) => [...prev, section])
+          if (section === "about") {
+            setTimeout(() => setBioWordsVisible(true), 500)
+          }
         }, index * 200)
       })
     }, 1500)
@@ -26,9 +29,40 @@ export default function HomePage() {
     return () => clearTimeout(timer)
   }, [])
 
+  const handleCompanyHover = (company: string, text: string) => {
+    const words = text.split(" ")
+    setLoadingTexts((prev) => ({ ...prev, [company]: [] }))
+
+    words.forEach((word, index) => {
+      setTimeout(() => {
+        setLoadingTexts((prev) => ({
+          ...prev,
+          [company]: [...(prev[company] || []), word],
+        }))
+      }, index * 80)
+    })
+  }
+
+  const handleCompanyLeave = (company: string) => {
+    setLoadingTexts((prev) => ({ ...prev, [company]: [] }))
+  }
+
+  const renderBioText = (text: string) => {
+    const words = text.split(" ")
+    return words.map((word, index) => (
+      <span
+        key={index}
+        className={`bio-word bio-word-${Math.min(index + 1, 20)} mr-1`}
+        style={{ animationDelay: bioWordsVisible ? `${index * 0.1}s` : "none" }}
+      >
+        {word}
+      </span>
+    ))
+  }
+
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-orange-100 flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
           <div className="animate-pulse-glow">
@@ -40,7 +74,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-orange-100">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
@@ -50,11 +84,11 @@ export default function HomePage() {
               <a href="#home" className="text-foreground hover:text-primary transition-colors">
                 Home
               </a>
-              <a href="#timeline" className="text-foreground hover:text-primary transition-colors">
-                Timeline
-              </a>
               <a href="#about" className="text-foreground hover:text-primary transition-colors">
                 About
+              </a>
+              <a href="#timeline" className="text-foreground hover:text-primary transition-colors">
+                Timeline
               </a>
             </div>
             <Button variant="outline" size="sm">
@@ -114,7 +148,7 @@ export default function HomePage() {
               <div className="relative w-80 h-80 mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 animate-pulse-glow"></div>
                 <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Frame%201%20from%20Figma-LLRLmDTMzJdzB5Rb6wLXHaaJavllBE.png"
+                  src="/young-woman-headshot.png"
                   alt="Rae's Profile"
                   className="relative z-10 w-full h-full object-cover rounded-full border-4 border-background shadow-2xl"
                 />
@@ -125,7 +159,7 @@ export default function HomePage() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 px-6 bg-card/50">
+      <section id="about" className="py-16 px-6 bg-card/50">
         <div className="max-w-4xl mx-auto">
           <div
             className={`space-y-8 ${visibleSections.includes("about") ? "animate-fade-in-up stagger-2" : "opacity-0"}`}
@@ -142,12 +176,18 @@ export default function HomePage() {
                     <h3 className="font-playfair font-semibold text-lg">Professional</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed">
-                    I excel at uncovering growth opportunities through data and thrive in the dynamic AI landscape,
-                    finding clarity in uncertainty.
+                    {bioWordsVisible
+                      ? renderBioText(
+                          "I excel at uncovering growth opportunities through data and thrive in the dynamic AI landscape, finding clarity in uncertainty.",
+                        )
+                      : "I excel at uncovering growth opportunities through data and thrive in the dynamic AI landscape, finding clarity in uncertainty."}
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    Most of the time, I'm calm and composed, enjoying the process of breaking down complex tasks,
-                    refining them to perfection, and questioning conventional problem-solving methods.
+                    {bioWordsVisible
+                      ? renderBioText(
+                          "Most of the time, I'm calm and composed, enjoying the process of breaking down complex tasks, refining them to perfection, and questioning conventional problem-solving methods.",
+                        )
+                      : "Most of the time, I'm calm and composed, enjoying the process of breaking down complex tasks, refining them to perfection, and questioning conventional problem-solving methods."}
                   </p>
                 </CardContent>
               </Card>
@@ -161,8 +201,11 @@ export default function HomePage() {
                     <h3 className="font-playfair font-semibold text-lg">Personal</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed">
-                    Outside work, I'm passionate about photography and music, currently creating my first Indie Rock
-                    album. In my free time, I enjoy rock climbing and watching movies.
+                    {bioWordsVisible
+                      ? renderBioText(
+                          "Outside work, I'm passionate about photography and music, currently creating my first Indie Rock album. In my free time, I enjoy rock climbing and watching movies.",
+                        )
+                      : "Outside work, I'm passionate about photography and music, currently creating my first Indie Rock album. In my free time, I enjoy rock climbing and watching movies."}
                   </p>
                 </CardContent>
               </Card>
@@ -180,78 +223,161 @@ export default function HomePage() {
             <h2 className="text-3xl font-playfair font-bold text-center text-foreground">Career Timeline</h2>
 
             <div className="relative">
-              {/* Timeline line */}
               <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"></div>
 
               <div className="space-y-12">
                 {/* RightBrain AI */}
                 <div className="relative flex items-start space-x-8">
-                  <div className="flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                    <Sparkles className="w-8 h-8 text-primary-foreground" />
+                  <div
+                    className="company-logo flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
+                    style={{ backgroundColor: "#3B82F6" }}
+                    onMouseEnter={() =>
+                      handleCompanyHover(
+                        "rightbrain",
+                        "Later, a serendipitous opportunity brought me to RightBrain AI as a startup fresh off its angel round, where I was the only intern in the operations team, reporting directly to the founder. As the team grew with like-minded colleagues, the environment buzzed with energy and creativity. I contributed to the cold launch of a million-user AIGC creation tool, managed social media accounts on X, Instagram, TikTok, and the official Discord community, built my first data dashboard while learning SQL, connected with global users, self-taught Google Ads via YouTube to run my first ad account, wrote plots for growth campaigns, and even learned Vibe Coding to create event pages. This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape.",
+                      )
+                    }
+                    onMouseLeave={() => handleCompanyLeave("rightbrain")}
+                  >
+                    <Sparkles className="w-8 h-8 text-white" />
                   </div>
-                  <Card className="flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
+                  <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                         <h3 className="font-playfair font-bold text-xl text-foreground">RightBrain AI</h3>
-                        <Badge variant="secondary">2023.9-2025.8</Badge>
+                        <Badge variant="secondary" style={{ backgroundColor: "#F97316", color: "white" }}>
+                          2023.9-2025.8
+                        </Badge>
                       </div>
-                      <p className="text-muted-foreground leading-relaxed">
-                        Later, a serendipitous opportunity brought me to RightBrain AI as a startup fresh off its angel
-                        round, where I was the only intern in the operations team, reporting directly to the founder. As
-                        the team grew with like-minded colleagues, the environment buzzed with energy and creativity. I
-                        contributed to the cold launch of a million-user AIGC creation tool, managed social media
-                        accounts on X, Instagram, TikTok, and the official Discord community, built my first data
-                        dashboard while learning SQL, connected with global users, self-taught Google Ads via YouTube to
-                        run my first ad account, wrote plots for growth campaigns, and even learned Vibe Coding to
-                        create event pages. This rapid growth fueled my passion for AI product growth—nothing excites me
-                        more than pushing my boundaries and embracing the possibilities of the unpredictable AI
-                        landscape.
-                      </p>
+                      <div className="text-muted-foreground leading-relaxed">
+                        {loadingTexts.rightbrain && loadingTexts.rightbrain.length > 0 ? (
+                          <span>
+                            {loadingTexts.rightbrain.map((word, index) => (
+                              <span
+                                key={index}
+                                className="animate-company-hover inline-block mr-1"
+                                style={{ animationDelay: `${index * 0.08}s` }}
+                              >
+                                {word}
+                              </span>
+                            ))}
+                          </span>
+                        ) : (
+                          <p>
+                            Later, a serendipitous opportunity brought me to RightBrain AI as a startup fresh off its
+                            angel round, where I was the only intern in the operations team, reporting directly to the
+                            founder. As the team grew with like-minded colleagues, the environment buzzed with energy
+                            and creativity. I contributed to the cold launch of a million-user AIGC creation tool,
+                            managed social media accounts on X, Instagram, TikTok, and the official Discord community,
+                            built my first data dashboard while learning SQL, connected with global users, self-taught
+                            Google Ads via YouTube to run my first ad account, wrote plots for growth campaigns, and
+                            even learned Vibe Coding to create event pages. This rapid growth fueled my passion for AI
+                            product growth—nothing excites me more than pushing my boundaries and embracing the
+                            possibilities of the unpredictable AI landscape.
+                          </p>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
 
                 {/* ByteDance */}
                 <div className="relative flex items-start space-x-8">
-                  <div className="flex-shrink-0 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg">
-                    <GraduationCap className="w-8 h-8 text-secondary-foreground" />
+                  <div
+                    className="company-logo flex-shrink-0 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
+                    style={{ backgroundColor: "#F97316" }}
+                    onMouseEnter={() =>
+                      handleCompanyHover(
+                        "bytedance",
+                        "Curious about big tech, I joined ByteDance as a content operations intern for Toutiao's encyclopedia business. The role gave me insight into large corporations, with their robust structures, mature workflows, and vast knowledge bases. However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities. I felt like a cog in a machine, unsure of my impact, which led me to consider leaving the corporate world.",
+                      )
+                    }
+                    onMouseLeave={() => handleCompanyLeave("bytedance")}
+                  >
+                    <GraduationCap className="w-8 h-8 text-white" />
                   </div>
-                  <Card className="flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
+                  <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                         <h3 className="font-playfair font-bold text-xl text-foreground">ByteDance</h3>
-                        <Badge variant="secondary">2023.3-2023.6</Badge>
+                        <Badge variant="secondary" style={{ backgroundColor: "#3B82F6", color: "white" }}>
+                          2023.3-2023.6
+                        </Badge>
                       </div>
-                      <p className="text-muted-foreground leading-relaxed">
-                        Curious about big tech, I joined ByteDance as a content operations intern for Toutiao's
-                        encyclopedia business. The role gave me insight into large corporations, with their robust
-                        structures, mature workflows, and vast knowledge bases. However, the intern tasks were highly
-                        fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning
-                        activities. I felt like a cog in a machine, unsure of my impact, which led me to consider
-                        leaving the corporate world.
-                      </p>
+                      <div className="text-muted-foreground leading-relaxed">
+                        {loadingTexts.bytedance && loadingTexts.bytedance.length > 0 ? (
+                          <span>
+                            {loadingTexts.bytedance.map((word, index) => (
+                              <span
+                                key={index}
+                                className="animate-company-hover inline-block mr-1"
+                                style={{ animationDelay: `${index * 0.08}s` }}
+                              >
+                                {word}
+                              </span>
+                            ))}
+                          </span>
+                        ) : (
+                          <p>
+                            Curious about big tech, I joined ByteDance as a content operations intern for Toutiao's
+                            encyclopedia business. The role gave me insight into large corporations, with their robust
+                            structures, mature workflows, and vast knowledge bases. However, the intern tasks were
+                            highly fragmented, requiring strict adherence to SOPs with little room for creativity, even
+                            in planning activities. I felt like a cog in a machine, unsure of my impact, which led me to
+                            consider leaving the corporate world.
+                          </p>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
 
                 {/* 36Kr */}
                 <div className="relative flex items-start space-x-8">
-                  <div className="flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg">
-                    <Briefcase className="w-8 h-8 text-accent-foreground" />
+                  <div
+                    className="company-logo flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
+                    style={{ backgroundColor: "#3B82F6" }}
+                    onMouseEnter={() =>
+                      handleCompanyHover(
+                        "36kr",
+                        "During my internship at 36Kr, I worked as a content intern focusing on overseas business articles within a startup media team. With significant creative freedom from my supervisor, I independently completed two well-received articles, mastering everything from topic planning and desk research to interviews and writing. This experience honed my market research and resource integration skills and sparked a deep interest in global business.",
+                      )
+                    }
+                    onMouseLeave={() => handleCompanyLeave("36kr")}
+                  >
+                    <Briefcase className="w-8 h-8 text-white" />
                   </div>
-                  <Card className="flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
+                  <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                         <h3 className="font-playfair font-bold text-xl text-foreground">36Kr</h3>
-                        <Badge variant="secondary">2022.9-2023.1</Badge>
+                        <Badge variant="secondary" style={{ backgroundColor: "#F97316", color: "white" }}>
+                          2022.9-2023.1
+                        </Badge>
                       </div>
-                      <p className="text-muted-foreground leading-relaxed">
-                        During my internship at 36Kr, I worked as a content intern focusing on overseas business
-                        articles within a startup media team. With significant creative freedom from my supervisor, I
-                        independently completed two well-received articles, mastering everything from topic planning and
-                        desk research to interviews and writing. This experience honed my market research and resource
-                        integration skills and sparked a deep interest in global business.
-                      </p>
+                      <div className="text-muted-foreground leading-relaxed">
+                        {loadingTexts["36kr"] && loadingTexts["36kr"].length > 0 ? (
+                          <span>
+                            {loadingTexts["36kr"].map((word, index) => (
+                              <span
+                                key={index}
+                                className="animate-company-hover inline-block mr-1"
+                                style={{ animationDelay: `${index * 0.08}s` }}
+                              >
+                                {word}
+                              </span>
+                            ))}
+                          </span>
+                        ) : (
+                          <p>
+                            During my internship at 36Kr, I worked as a content intern focusing on overseas business
+                            articles within a startup media team. With significant creative freedom from my supervisor,
+                            I independently completed two well-received articles, mastering everything from topic
+                            planning and desk research to interviews and writing. This experience honed my market
+                            research and resource integration skills and sparked a deep interest in global business.
+                          </p>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
