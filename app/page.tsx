@@ -12,6 +12,7 @@ export default function HomePage() {
   const introTextRaw = "I graduated from Peking University in 2024 and have worked as a Growth Operations specialist at an AI startup in Haidian, Beijing, starting as an intern before becoming a full-time employee.";
   const [typedTitle, setTypedTitle] = useState("");
   const [typedText, setTypedText] = useState("");
+  
   useEffect(() => {
     let i = 0;
     const typeTitle = () => {
@@ -22,6 +23,7 @@ export default function HomePage() {
       }
     };
     typeTitle();
+    
     // After title finishes, start intro after 3s
     setTimeout(() => {
       let j = 0;
@@ -34,8 +36,10 @@ export default function HomePage() {
       };
       typeIntro();
     }, titleTextRaw.length * 60 + 3000); // 3s after title
+    
     return () => {};
   }, []);
+
   const [isLoading, setIsLoading] = useState(true)
   const [visibleSections, setVisibleSections] = useState<string[]>([])
   const [loadingTexts, setLoadingTexts] = useState<{ [key: string]: string[] }>({})
@@ -200,15 +204,15 @@ export default function HomePage() {
 
             <div className="relative">
               <div className="relative w-80 h-80 mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 animate-pulse-glow"></div>
-              <img
-                src="/headshot-1.JPG"
-                alt="Rae's Profile"
-                className="relative z-10 w-full h-full object-cover rounded-full border-4 border-background shadow-2xl object-center"
-                style={{ objectPosition: "10% center" }} // 适当调整百分比
-              />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 animate-pulse-glow"></div>
+                <img
+                  src="/headshot-1.JPG"
+                  alt="Rae's Profile"
+                  className="relative z-10 w-full h-full object-cover rounded-full border-4 border-background shadow-2xl object-center"
+                  style={{ objectPosition: "10% center" }} 
+                />
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </section>
@@ -269,7 +273,8 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* About Section */}
       <section id="about" className="min-h-screen flex items-center py-16 px-6 bg-card/50">
