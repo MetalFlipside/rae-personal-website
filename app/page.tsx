@@ -225,7 +225,6 @@ export default function HomePage() {
               <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"></div>
 
               <div className="space-y-12">
-                {/* 36Kr */}
                 <div className="relative flex items-start space-x-8">
                   <div
                     className="company-logo flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
@@ -257,7 +256,6 @@ export default function HomePage() {
                   </Card>
                 </div>
 
-                {/* ByteDance */}
                 <div className="relative flex items-start space-x-8">
                   <div
                     className="company-logo flex-shrink-0 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
@@ -292,7 +290,6 @@ export default function HomePage() {
                   </Card>
                 </div>
 
-                {/* RightBrain AI */}
                 <div className="relative flex items-start space-x-8">
                   <div
                     className="company-logo flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
