@@ -78,39 +78,47 @@ export default function HomePage() {
   }
 
   const handleCardClick = (company: string) => {
-    setExpandedCard(current => current === company ? null : company)
-    if (!loadingTexts[company]) {
+    if (expandedCard === company) {
+      // 如果点击已展开的卡片，则收起
+      setExpandedCard(null)
+      setLoadingTexts(prev => ({ ...prev, [company]: [] }))
+    } else {
+      // 如果点击新卡片，则展开新卡片并收起之前的卡片
+      const prevCard = expandedCard
+      setExpandedCard(company)
+      
+      // 清除之前展开卡片的内容
+      if (prevCard) {
+        setLoadingTexts(prev => ({ ...prev, [prevCard]: [] }))
+      }
+      
+      // 为新卡片加载内容
       handleCompanyHover(company, getCompanyContent(company))
     }
   }
 
-  // 关闭展开的卡片
-  const handleCardClose = () => {
-    setExpandedCard(null)
-  }
-
   const handleCompanyHover = (company: string, text: string) => {
-    // 将文本按句子分段，保持完整的短语
-    const phrases = text.match(/[^.!?]+[.!?]+/g) || [text]
-    setLoadingTexts((prev) => ({ ...prev, [company]: [] }))
+    // 分词并开始动画
+    const words = text.split(/\s+/).filter(word => word.length > 0)
+    setLoadingTexts(prev => ({ ...prev, [company]: [] }))
 
-    let wordCount = 0
-    phrases.forEach((phrase) => {
-      const words = phrase.trim().split(/\s+/)
-      words.forEach((word) => {
-        setTimeout(() => {
-          setLoadingTexts((prev) => ({
+    words.forEach((word, index) => {
+      setTimeout(() => {
+        setLoadingTexts(prev => {
+          const newWords = [...(prev[company] || []), word]
+          return {
             ...prev,
-            [company]: [...(prev[company] || []), word],
-          }))
-        }, wordCount * 50) // 减少延迟时间以加快动画
-        wordCount++
-      })
+            [company]: newWords
+          }
+        })
+      }, index * 40) // 更快的动画速度
     })
   }
 
   const handleCompanyLeave = (company: string) => {
-    setLoadingTexts((prev) => ({ ...prev, [company]: [] }))
+    if (expandedCard !== company) { // 只有在卡片未展开时才清空文字
+      setLoadingTexts(prev => ({ ...prev, [company]: [] }))
+    }
   }
 
   const renderBioText = (text: string) => {
@@ -300,8 +308,8 @@ export default function HomePage() {
                   </Card>
                 </div>
 
-                <div className="relative flex items-start space-x-8">
-                  <img src="/ByteDance.JPG" alt="ByteDance Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
+                <div className="relative flex items-start space-x-4 sm:space-x-8">
+                  <img src="/ByteDance.JPG" alt="ByteDance Logo" className="company-logo flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-full shadow-lg z-10 bg-white" />
                   <Card 
                     className={`timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer max-w-lg
                       ${expandedCard === "bytedance" ? "scale-102 shadow-2xl" : "hover:scale-101"}`}
@@ -337,8 +345,8 @@ export default function HomePage() {
                   </Card>
                 </div>
 
-                <div className="relative flex items-start space-x-8">
-                  <img src="/RightBrain.JPG" alt="RightBrain Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
+                <div className="relative flex items-start space-x-4 sm:space-x-8">
+                  <img src="/RightBrain.JPG" alt="RightBrain Logo" className="company-logo flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-full shadow-lg z-10 bg-white" />
                   <Card 
                     className={`timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer max-w-lg
                       ${expandedCard === "rightbrain" ? "scale-102 shadow-2xl" : "hover:scale-101"}`}
