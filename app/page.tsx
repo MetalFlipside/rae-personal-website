@@ -42,6 +42,7 @@ export default function HomePage() {
 
   const [isLoading, setIsLoading] = useState(true)
   const [visibleSections, setVisibleSections] = useState<string[]>([])
+  const [expandedCard, setExpandedCard] = useState<string | null>(null)
   const [loadingTexts, setLoadingTexts] = useState<{ [key: string]: string[] }>({})
   const [bioWordsVisible, setBioWordsVisible] = useState(false)
 
@@ -61,6 +62,32 @@ export default function HomePage() {
 
     return () => clearTimeout(timer)
   }, [])
+
+  // 点击卡片时切换展开状态
+  const getCompanyContent = (company: string): string => {
+    switch (company) {
+      case "36kr":
+        return "During my internship at 36Kr, I worked as a content intern focusing on overseas business articles within a startup media team. With significant creative freedom from my supervisor, I independently completed two well-received articles, mastering everything from topic planning and desk research to interviews and writing. This experience honed my market research and resource integration skills and sparked a deep interest in global business."
+      case "bytedance":
+        return "Curious about big tech, I joined ByteDance as a content operations intern for Toutiao's encyclopedia business. The role gave me insight into large corporations, with their robust structures, mature workflows, and vast knowledge bases. However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities. I felt like a cog in a machine, unsure of my impact, which led me to consider leaving the corporate world."
+      case "rightbrain":
+        return "Later, a serendipitous opportunity brought me to RightBrain AI as a startup fresh off its angel round, where I was the only intern in the operations team, reporting directly to the founder. As the team grew with like-minded colleagues, the environment buzzed with energy and creativity. I contributed to the cold launch of a million-user AIGC creation tool, managed social media accounts on X, Instagram, TikTok, and the official Discord community, built my first data dashboard while learning SQL, connected with global users, self-taught Google Ads via YouTube to run my first ad account, wrote plots for growth campaigns, and even learned Vibe Coding to create event pages. This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape."
+      default:
+        return ""
+    }
+  }
+
+  const handleCardClick = (company: string) => {
+    setExpandedCard(current => current === company ? null : company)
+    if (!loadingTexts[company]) {
+      handleCompanyHover(company, getCompanyContent(company))
+    }
+  }
+
+  // 关闭展开的卡片
+  const handleCardClose = () => {
+    setExpandedCard(null)
+  }
 
   const handleCompanyHover = (company: string, text: string) => {
     const words = text.split(" ")
@@ -226,20 +253,20 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-center text-foreground">Career Timeline</h2>
 
             <div className="relative">
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"></div>
+              <div className="absolute left-8 sm:left-8 lg:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"></div>
 
-              <div className="space-y-12">
-                <div className="relative flex items-start space-x-8">
-                  <img src="/36Kr.JPG" alt="36Kr Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
+              <div className="space-y-16 sm:space-y-20">
+                <div className="relative flex items-start space-x-4 sm:space-x-8">
+                  <img src="/36Kr.JPG" alt="36Kr Logo" className="company-logo flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-full shadow-lg z-10 bg-white" />
                   <Card 
-                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-                    onMouseEnter={() =>
-                      handleCompanyHover(
-                        "36kr",
-                        "During my internship at 36Kr, I worked as a content intern focusing on overseas business articles within a startup media team. With significant creative freedom from my supervisor, I independently completed two well-received articles, mastering everything from topic planning and desk research to interviews and writing. This experience honed my market research and resource integration skills and sparked a deep interest in global business.",
-                      )
-                    }
-                    onMouseLeave={() => handleCompanyLeave("36kr")}
+                    className={`timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer max-w-lg 
+                      ${expandedCard === "36kr" ? "scale-102 shadow-2xl" : "hover:scale-101"}`}
+                    onClick={() => handleCardClick("36kr")}
+                    onMouseLeave={() => {
+                      if (expandedCard !== "36kr") {
+                        handleCompanyLeave("36kr")
+                      }
+                    }}
                   >
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
@@ -248,7 +275,9 @@ export default function HomePage() {
                           2022.9-2023.1
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px] transition-all duration-300" style={{ maxWidth: "100%", wordWrap: "break-word" }}>
+                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden
+                        ${expandedCard === "36kr" ? "min-h-[100px]" : "min-h-[60px]"}`}
+                        style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["36kr"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("independently") || word.includes("well-received") || word.includes("topic") || word.includes("planning") || word.includes("desk") || word.includes("research") || word.includes("interviews") || word.includes("writing") ? (
@@ -266,14 +295,14 @@ export default function HomePage() {
                 <div className="relative flex items-start space-x-8">
                   <img src="/ByteDance.JPG" alt="ByteDance Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
                   <Card 
-                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-                    onMouseEnter={() =>
-                      handleCompanyHover(
-                        "bytedance",
-                        "Curious about big tech, I joined ByteDance as a content operations intern for Toutiao's encyclopedia business. The role gave me insight into large corporations, with their robust structures, mature workflows, and vast knowledge bases. However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities. I felt like a cog in a machine, unsure of my impact, which led me to consider leaving the corporate world.",
-                      )
-                    }
-                    onMouseLeave={() => handleCompanyLeave("bytedance")}
+                    className={`timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer max-w-lg
+                      ${expandedCard === "bytedance" ? "scale-102 shadow-2xl" : "hover:scale-101"}`}
+                    onClick={() => handleCardClick("bytedance")}
+                    onMouseLeave={() => {
+                      if (expandedCard !== "bytedance") {
+                        handleCompanyLeave("bytedance")
+                      }
+                    }}
                   >
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
@@ -282,7 +311,9 @@ export default function HomePage() {
                           2023.3-2023.6
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px] transition-all duration-300" style={{ maxWidth: "100%", wordWrap: "break-word" }}>
+                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden
+                        ${expandedCard === "bytedance" ? "min-h-[100px]" : "min-h-[60px]"}`}
+                        style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["bytedance"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("insight") || word.includes("robust") || word.includes("structures") || word.includes("mature") || word.includes("workflows") || word.includes("knowledge") || word.includes("bases") ? (
@@ -300,14 +331,14 @@ export default function HomePage() {
                 <div className="relative flex items-start space-x-8">
                   <img src="/RightBrain.JPG" alt="RightBrain Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
                   <Card 
-                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-                    onMouseEnter={() =>
-                      handleCompanyHover(
-                        "rightbrain",
-                        "Later, a serendipitous opportunity brought me to RightBrain AI as a startup fresh off its angel round, where I was the only intern in the operations team, reporting directly to the founder. As the team grew with like-minded colleagues, the environment buzzed with energy and creativity. I contributed to the cold launch of a million-user AIGC creation tool, managed social media accounts on X, Instagram, TikTok, and the official Discord community, built my first data dashboard while learning SQL, connected with global users, self-taught Google Ads via YouTube to run my first ad account, wrote plots for growth campaigns, and even learned Vibe Coding to create event pages. This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape.",
-                      )
-                    }
-                    onMouseLeave={() => handleCompanyLeave("rightbrain")}
+                    className={`timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer max-w-lg
+                      ${expandedCard === "rightbrain" ? "scale-102 shadow-2xl" : "hover:scale-101"}`}
+                    onClick={() => handleCardClick("rightbrain")}
+                    onMouseLeave={() => {
+                      if (expandedCard !== "rightbrain") {
+                        handleCompanyLeave("rightbrain")
+                      }
+                    }}
                   >
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
@@ -316,7 +347,9 @@ export default function HomePage() {
                           2023.9-2025.8
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px] transition-all duration-300" style={{ maxWidth: "100%", wordWrap: "break-word" }}>
+                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden
+                        ${expandedCard === "rightbrain" ? "min-h-[100px]" : "min-h-[60px]"}`}
+                        style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["rightbrain"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("operations") || word.includes("founder") || word.includes("million-user") || word.includes("social") || word.includes("media") || word.includes("Discord") || word.includes("data") || word.includes("dashboard") || word.includes("Google") || word.includes("Ads") || word.includes("Vibe") || word.includes("Coding") || word.includes("pushing") || word.includes("boundaries") || word.includes("embracing") || word.includes("possibilities") ? (

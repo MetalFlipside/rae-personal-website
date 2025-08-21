@@ -162,6 +162,22 @@
   background: var(--secondary);
 }
 
+/* Timeline 卡片样式 */
+.scale-101 {
+  transform: scale(1.01);
+}
+
+.scale-102 {
+  transform: scale(1.02);
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+  .timeline-content {
+    margin-left: 1rem;
+  }
+}
+
 /* 所有你的自定义动画 */
 @keyframes fadeInUp {
   from {
