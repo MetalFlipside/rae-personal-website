@@ -67,11 +67,11 @@ export default function HomePage() {
   const getCompanyContent = (company: string): string => {
     switch (company) {
       case "36kr":
-        return "During my internship at 36Kr, I worked as a content intern focusing on overseas business articles within a startup media team. With significant creative freedom from my supervisor, I independently completed two well-received articles, mastering everything from topic planning and desk research to interviews and writing. This experience honed my market research and resource integration skills and sparked a deep interest in global business."
+        return "During my internship at 36Kr, I worked as a content intern focusing on overseas business articles within a startup media team. With significant creative freedom from my supervisor, I independently completed two well-received articles, handling everything from topic planning and desk research to interviews and writing. This experience honed my market research and resource integration skills and sparked a deep interest in global business."
       case "bytedance":
         return "Curious about big tech, I joined ByteDance as a content operations intern for Toutiao's encyclopedia business. The role gave me insight into large corporations, with their robust structures, mature workflows, and vast knowledge bases. However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities. I felt like a cog in a machine, unsure of my impact, which led me to consider leaving the corporate world."
       case "rightbrain":
-        return "Later, a serendipitous opportunity brought me to RightBrain AI as a startup fresh off its angel round, where I was the only intern in the operations team, reporting directly to the founder. As the team grew with like-minded colleagues, the environment buzzed with energy and creativity. I contributed to the cold launch of a million-user AIGC creation tool, managed social media accounts on X, Instagram, TikTok, and the official Discord community, built my first data dashboard while learning SQL, connected with global users, self-taught Google Ads via YouTube to run my first ad account, wrote plots for growth campaigns, and even learned Vibe Coding to create event pages. This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape."
+        return "Later, a serendipitous opportunity brought me to RightBrain AI, a startup fresh off its angel round, where I was the only intern in the operations team, reporting directly to the founder. As the team grew with like-minded colleagues, the environment buzzed with energy and creativity. I contributed to the cold launch of a million-user AIGC creation tool, managed official social media accounts on X, Instagram, TikTok, and the official Discord community, built my first data dashboard while learning SQL, connected with global users, self-taught Google Ads via YouTube to run my first ad account, wrote PRDs for growth campaigns, and even learned Vibe Coding to create event pages. This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape."
       default:
         return ""
     }
@@ -90,16 +90,22 @@ export default function HomePage() {
   }
 
   const handleCompanyHover = (company: string, text: string) => {
-    const words = text.split(" ")
+    // 将文本按句子分段，保持完整的短语
+    const phrases = text.match(/[^.!?]+[.!?]+/g) || [text]
     setLoadingTexts((prev) => ({ ...prev, [company]: [] }))
 
-    words.forEach((word, index) => {
-      setTimeout(() => {
-        setLoadingTexts((prev) => ({
-          ...prev,
-          [company]: [...(prev[company] || []), word],
-        }))
-      }, index * 80)
+    let wordCount = 0
+    phrases.forEach((phrase) => {
+      const words = phrase.trim().split(/\s+/)
+      words.forEach((word) => {
+        setTimeout(() => {
+          setLoadingTexts((prev) => ({
+            ...prev,
+            [company]: [...(prev[company] || []), word],
+          }))
+        }, wordCount * 50) // 减少延迟时间以加快动画
+        wordCount++
+      })
     })
   }
 
@@ -280,7 +286,9 @@ export default function HomePage() {
                         style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["36kr"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
-                            {word.includes("independently") || word.includes("well-received") || word.includes("topic") || word.includes("planning") || word.includes("desk") || word.includes("research") || word.includes("interviews") || word.includes("writing") ? (
+                            {word.includes("content intern") || 
+                             word.includes("I independently completed two well-received articles") || 
+                             word.includes("This experience honed my market research and resource integration skills and sparked a deep interest in global business") ? (
                               <strong className="text-orange-500">{word}</strong>
                             ) : (
                               word
@@ -316,7 +324,8 @@ export default function HomePage() {
                         style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["bytedance"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
-                            {word.includes("insight") || word.includes("robust") || word.includes("structures") || word.includes("mature") || word.includes("workflows") || word.includes("knowledge") || word.includes("bases") ? (
+                            {word.includes("content operations intern") || 
+                             word.includes("However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities") ? (
                               <strong className="text-orange-500">{word}</strong>
                             ) : (
                               word
@@ -352,7 +361,14 @@ export default function HomePage() {
                         style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["rightbrain"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
-                            {word.includes("operations") || word.includes("founder") || word.includes("million-user") || word.includes("social") || word.includes("media") || word.includes("Discord") || word.includes("data") || word.includes("dashboard") || word.includes("Google") || word.includes("Ads") || word.includes("Vibe") || word.includes("Coding") || word.includes("pushing") || word.includes("boundaries") || word.includes("embracing") || word.includes("possibilities") ? (
+                            {word.includes("the only intern") || 
+                             word.includes("million-user AIGC creation tool") || 
+                             word.includes("official social media accounts") ||
+                             word.includes("official Discord community") ||
+                             word.includes("Google Ads") ||
+                             word.includes("PRDs") ||
+                             word.includes("Vibe Coding") ||
+                             word.includes("This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape") ? (
                               <strong className="text-orange-500">{word}</strong>
                             ) : (
                               word
