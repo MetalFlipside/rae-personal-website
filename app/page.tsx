@@ -226,9 +226,7 @@ export default function HomePage() {
 
               <div className="space-y-12">
                 <div className="relative flex items-start space-x-8">
-                  <div className="company-logo flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl">
-                    <img src="/36Kr.JPG" alt="36Kr Logo" className="w-full h-full object-cover rounded-full" />
-                  </div>
+                  <img src="/36Kr.JPG" alt="36Kr Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
@@ -242,9 +240,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="relative flex items-start space-x-8">
-                  <div className="company-logo flex-shrink-0 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl">
-                    <img src="/ByteDance.JPG" alt="ByteDance Logo" className="w-full h-full object-cover rounded-full" />
-                  </div>
+                  <img src="/ByteDance.JPG" alt="ByteDance Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
@@ -258,9 +254,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="relative flex items-start space-x-8">
-                  <div className="company-logo flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl">
-                    <img src="/RightBrain.JPG" alt="RightBrain Logo" className="w-full h-full object-cover rounded-full" />
-                  </div>
+                  <img src="/RightBrain.JPG" alt="RightBrain Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
