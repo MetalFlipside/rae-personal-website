@@ -171,6 +171,15 @@
   transform: scale(1.02);
 }
 
+/* Text content styles */
+.text-content {
+  text-wrap: balance;
+  white-space: normal;
+  word-wrap: break-word;
+  hyphens: auto;
+  word-break: keep-all;
+}
+
 /* 响应式调整 */
 @media (max-width: 640px) {
   .timeline-content {

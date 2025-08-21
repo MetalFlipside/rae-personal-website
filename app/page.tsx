@@ -98,8 +98,11 @@ export default function HomePage() {
   }
 
   const handleCompanyHover = (company: string, text: string) => {
-    // 分词并开始动画
-    const words = text.split(/\s+/).filter(word => word.length > 0)
+    // 使用更智能的分词方法，保持短横线连接的词在一起
+    const words = text.split(/(?<=\.) |(?<=\!) |(?<=\?) |(?<=[,;]) |(?<!\S-)\s+(?!-\S)/g)
+      .filter(word => word.length > 0)
+      .map(word => word.trim())
+    
     setLoadingTexts(prev => ({ ...prev, [company]: [] }))
 
     words.forEach((word, index) => {
@@ -289,18 +292,17 @@ export default function HomePage() {
                           2022.9-2023.1
                         </Badge>
                       </div>
-                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden
+                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden text-content
                         ${expandedCard === "36kr" ? "min-h-[100px]" : "min-h-[60px]"}`}
-                        style={{ maxWidth: "100%", wordWrap: "break-word" }}>
+                        style={{ maxWidth: "100%" }}>
                         {loadingTexts["36kr"]?.map((word, idx) => (
-                          <span key={idx} className="mr-1">
-                            {word.includes("content intern") || 
-                             word.includes("I independently completed two well-received articles") || 
-                             word.includes("This experience honed my market research and resource integration skills and sparked a deep interest in global business") ? (
-                              <strong className="text-orange-500">{word}</strong>
-                            ) : (
-                              word
-                            )}
+                          <span key={idx} className={`${
+                            word.toLowerCase().includes("content intern") ||
+                            word.includes("I independently completed two well-received articles, handling everything from topic planning and desk research to interviews and writing")
+                              ? "text-orange-500 font-bold"
+                              : ""
+                          }`}>
+                            {word}{' '}
                           </span>
                         ))}
                       </div>
@@ -327,17 +329,17 @@ export default function HomePage() {
                           2023.3-2023.6
                         </Badge>
                       </div>
-                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden
+                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden text-content
                         ${expandedCard === "bytedance" ? "min-h-[100px]" : "min-h-[60px]"}`}
-                        style={{ maxWidth: "100%", wordWrap: "break-word" }}>
+                        style={{ maxWidth: "100%" }}>
                         {loadingTexts["bytedance"]?.map((word, idx) => (
-                          <span key={idx} className="mr-1">
-                            {word.includes("content operations intern") || 
-                             word.includes("However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities") ? (
-                              <strong className="text-orange-500">{word}</strong>
-                            ) : (
-                              word
-                            )}
+                          <span key={idx} className={`${
+                            word.toLowerCase().includes("content operations intern") ||
+                            word.includes("However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities")
+                              ? "text-orange-500 font-bold"
+                              : ""
+                          }`}>
+                            {word}{' '}
                           </span>
                         ))}
                       </div>
@@ -364,23 +366,23 @@ export default function HomePage() {
                           2023.9-2025.8
                         </Badge>
                       </div>
-                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden
+                      <div className={`text-muted-foreground leading-relaxed transition-all duration-300 overflow-hidden text-content
                         ${expandedCard === "rightbrain" ? "min-h-[100px]" : "min-h-[60px]"}`}
-                        style={{ maxWidth: "100%", wordWrap: "break-word" }}>
+                        style={{ maxWidth: "100%" }}>
                         {loadingTexts["rightbrain"]?.map((word, idx) => (
-                          <span key={idx} className="mr-1">
-                            {word.includes("the only intern") || 
-                             word.includes("million-user AIGC creation tool") || 
-                             word.includes("official social media accounts") ||
-                             word.includes("official Discord community") ||
-                             word.includes("Google Ads") ||
-                             word.includes("PRDs") ||
-                             word.includes("Vibe Coding") ||
-                             word.includes("This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape") ? (
-                              <strong className="text-orange-500">{word}</strong>
-                            ) : (
-                              word
-                            )}
+                          <span key={idx} className={`${
+                            word.includes("the only intern") || 
+                            word.includes("million-user AIGC creation tool") || 
+                            word.includes("official social media accounts") ||
+                            word.includes("official Discord community") ||
+                            word.includes("Google Ads") ||
+                            word.includes("PRDs") ||
+                            word.includes("Vibe Coding") ||
+                            word.includes("This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape")
+                              ? "text-orange-500 font-bold"
+                              : ""
+                          }`}>
+                            {word}{' '}
                           </span>
                         ))}
                       </div>
