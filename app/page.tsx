@@ -7,6 +7,22 @@ import { Badge } from "@/components/ui/badge"
 import { ChevronDown, Mail, Linkedin, Instagram, ExternalLink, Briefcase, GraduationCap, Sparkles } from "lucide-react"
 
 export default function HomePage() {
+  // Typewriter effect for hero intro
+  const introText = `I graduated from **Peking University** in 2024 and have worked as a **Growth Operations** specialist at an AI startup in Haidian, Beijing, starting as an intern before becoming a full-time employee.`;
+  const [typedText, setTypedText] = useState("");
+  useEffect(() => {
+    let i = 0;
+    let timer: NodeJS.Timeout;
+    function type() {
+      if (i <= introText.length) {
+        setTypedText(introText.slice(0, i));
+        i++;
+        timer = setTimeout(type, 30);
+      }
+    }
+    type();
+    return () => clearTimeout(timer);
+  }, []);
   const [isLoading, setIsLoading] = useState(true)
   const [visibleSections, setVisibleSections] = useState<string[]>([])
   const [loadingTexts, setLoadingTexts] = useState<{ [key: string]: string[] }>({})
@@ -116,9 +132,14 @@ export default function HomePage() {
                 <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                   Hi, this is <span className="text-primary">Rae</span>
                 </h1>
-                <p className="text-xl text-muted-foreground leading-relaxed">
-                  I graduated from Peking University in 2024 and have worked as a Growth Operations specialist at an AI
-                  startup in Haidian, Beijing, starting as an intern before becoming a full-time employee.
+                <p className="text-xl text-white leading-relaxed">
+                  {/* Typewriter effect with bold highlights */}
+                  <span dangerouslySetInnerHTML={{
+                    __html: typedText
+                      .replace(/\*\*Peking University\*\*/g, '<strong class="font-bold text-orange-500">Peking University</strong>')
+                      .replace(/\*\*Growth Operations\*\*/g, '<strong class="font-bold text-orange-500">Growth Operations</strong>')
+                  }} />
+                  <span className="inline-block w-2 h-6 bg-white align-middle animate-blink ml-1" />
                 </p>
               </div>
 
