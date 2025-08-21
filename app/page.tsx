@@ -66,7 +66,7 @@ export default function HomePage() {
         <div className="text-center space-y-4">
           <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
           <div className="animate-pulse-glow">
-            <h2 className="text-2xl font-playfair font-bold text-primary">Loading...</h2>
+            <h2 className="text-2xl font-bold text-primary">Loading...</h2>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ export default function HomePage() {
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="font-playfair font-bold text-2xl text-primary">Rae</div>
+            <div className="font-bold text-2xl text-primary">Rae</div>
             <div className="hidden md:flex space-x-8">
               <a href="#home" className="text-foreground hover:text-primary transition-colors">
                 Home
@@ -113,7 +113,7 @@ export default function HomePage() {
                   <Sparkles className="w-3 h-3 mr-1" />
                   AI & Growth Operations Specialist
                 </Badge>
-                <h1 className="text-5xl lg:text-6xl font-playfair font-bold text-foreground leading-tight">
+                <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                   Hi, this is <span className="text-primary">Rae</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
@@ -176,7 +176,7 @@ export default function HomePage() {
           <div
             className={`space-y-8 ${visibleSections.includes("about") ? "animate-fade-in-up stagger-2" : "opacity-0"}`}
           >
-            <h2 className="text-3xl font-playfair font-bold text-center text-foreground">About Me</h2>
+            <h2 className="text-3xl font-bold text-center text-foreground">About Me</h2>
 
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="border-0 shadow-lg">
@@ -185,7 +185,7 @@ export default function HomePage() {
                     <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                       <Briefcase className="w-5 h-5 text-primary" />
                     </div>
-                    <h3 className="font-playfair font-semibold text-lg">Professional</h3>
+                    <h3 className="font-semibold text-lg">Professional</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed">
                     {bioWordsVisible
@@ -210,7 +210,7 @@ export default function HomePage() {
                     <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
                       <Sparkles className="w-5 h-5 text-accent" />
                     </div>
-                    <h3 className="font-playfair font-semibold text-lg">Personal</h3>
+                    <h3 className="font-semibold text-lg">Personal</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed">
                     {bioWordsVisible
@@ -232,7 +232,7 @@ export default function HomePage() {
           <div
             className={`space-y-12 ${visibleSections.includes("timeline") ? "animate-fade-in-up stagger-3" : "opacity-0"}`}
           >
-            <h2 className="text-3xl font-playfair font-bold text-center text-foreground">Career Timeline</h2>
+            <h2 className="text-3xl font-bold text-center text-foreground">Career Timeline</h2>
 
             <div className="relative">
               <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"></div>
@@ -256,7 +256,7 @@ export default function HomePage() {
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <h3 className="font-playfair font-bold text-xl text-foreground">RightBrain AI</h3>
+                        <h3 className="font-bold text-xl text-foreground">RightBrain AI</h3>
                         <Badge variant="secondary" style={{ backgroundColor: "#F97316", color: "white" }}>
                           2023.9-2025.8
                         </Badge>
@@ -311,7 +311,7 @@ export default function HomePage() {
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <h3 className="font-playfair font-bold text-xl text-foreground">ByteDance</h3>
+                        <h3 className="font-bold text-xl text-foreground">ByteDance</h3>
                         <Badge variant="secondary" style={{ backgroundColor: "#3B82F6", color: "white" }}>
                           2023.3-2023.6
                         </Badge>
@@ -362,7 +362,7 @@ export default function HomePage() {
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <h3 className="font-playfair font-bold text-xl text-foreground">36Kr</h3>
+                        <h3 className="font-bold text-xl text-foreground">36Kr</h3>
                         <Badge variant="secondary" style={{ backgroundColor: "#F97316", color: "white" }}>
                           2022.9-2023.1
                         </Badge>
@@ -402,7 +402,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="py-16 px-6 bg-gradient-to-r from-primary/10 to-secondary/10">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl font-playfair font-bold text-foreground">Let's Connect</h2>
+          <h2 className="text-3xl font-bold text-foreground">Let's Connect</h2>
           <p className="text-xl text-muted-foreground">Interested in collaborating or learning more about my work?</p>
           <Button size="lg" className="bg-primary hover:bg-primary/90">
             <Mail className="w-5 h-5 mr-2" />
