@@ -98,8 +98,8 @@ export default function HomePage() {
   }
 
   const handleCompanyHover = (company: string, text: string) => {
-    // 使用更智能的分词方法，保持短横线连接的词在一起
-    const words = text.split(/(?<=\.) |(?<=\!) |(?<=\?) |(?<=[,;]) |(?<!\S-)\s+(?!-\S)/g)
+    // 改进分词逻辑，保持短语的完整性
+    const words = text.split(/(?<=[.!?;,])\s+|\s+(?=[.!?;,])|(?<!\S-)\s+(?!-\S)/g)
       .filter(word => word.length > 0)
       .map(word => word.trim())
     
@@ -297,8 +297,8 @@ export default function HomePage() {
                         style={{ maxWidth: "100%" }}>
                         {loadingTexts["36kr"]?.map((word, idx) => (
                           <span key={idx} className={`${
-                            word.toLowerCase().includes("content intern") ||
-                            word.includes("I independently completed two well-received articles, handling everything from topic planning and desk research to interviews and writing")
+                            word.trim().toLowerCase() === "content intern" ||
+                            word.trim() === "I independently completed two well-received articles, handling everything from topic planning and desk research to interviews and writing"
                               ? "text-orange-500 font-bold"
                               : ""
                           }`}>
@@ -334,8 +334,8 @@ export default function HomePage() {
                         style={{ maxWidth: "100%" }}>
                         {loadingTexts["bytedance"]?.map((word, idx) => (
                           <span key={idx} className={`${
-                            word.toLowerCase().includes("content operations intern") ||
-                            word.includes("However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities")
+                            word.toLowerCase().trim() === "content operations intern" ||
+                            word.trim() === "However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities"
                               ? "text-orange-500 font-bold"
                               : ""
                           }`}>
@@ -371,14 +371,14 @@ export default function HomePage() {
                         style={{ maxWidth: "100%" }}>
                         {loadingTexts["rightbrain"]?.map((word, idx) => (
                           <span key={idx} className={`${
-                            word.includes("the only intern") || 
-                            word.includes("million-user AIGC creation tool") || 
-                            word.includes("official social media accounts") ||
-                            word.includes("official Discord community") ||
-                            word.includes("Google Ads") ||
-                            word.includes("PRDs") ||
-                            word.includes("Vibe Coding") ||
-                            word.includes("This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape")
+                            word.trim() === "the only intern" || 
+                            word.trim() === "million-user AIGC creation tool" || 
+                            word.trim() === "official social media accounts" ||
+                            word.trim() === "official Discord community" ||
+                            word.trim() === "Google Ads" ||
+                            word.trim() === "PRDs" ||
+                            word.trim() === "Vibe Coding" ||
+                            word.trim() === "This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape"
                               ? "text-orange-500 font-bold"
                               : ""
                           }`}>
