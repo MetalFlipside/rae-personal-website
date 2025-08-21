@@ -132,7 +132,7 @@ export default function HomePage() {
                 <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                   Hi, this is <span className="text-primary">Rae</span>
                 </h1>
-                <p className="text-xl text-white leading-relaxed">
+                <p className="text-xl text-gray-400 leading-relaxed">
                   {/* Typewriter effect with bold highlights */}
                   {typedText.split(/(Peking University|Growth Operations)/g).map((part, idx) => {
                     if (part === "Peking University" || part === "Growth Operations") {
