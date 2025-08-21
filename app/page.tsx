@@ -248,7 +248,7 @@ export default function HomePage() {
                           2022.9-2023.1
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px]">
+                      <div className="text-muted-foreground leading-relaxed min-h-[100px] max-h-[200px] overflow-y-auto">
                         {loadingTexts["36kr"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("independently") || word.includes("well-received") || word.includes("topic") || word.includes("planning") || word.includes("desk") || word.includes("research") || word.includes("interviews") || word.includes("writing") ? (
@@ -282,7 +282,7 @@ export default function HomePage() {
                           2023.3-2023.6
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px]">
+                      <div className="text-muted-foreground leading-relaxed min-h-[100px] max-h-[200px] overflow-y-auto">
                         {loadingTexts["bytedance"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("insight") || word.includes("robust") || word.includes("structures") || word.includes("mature") || word.includes("workflows") || word.includes("knowledge") || word.includes("bases") ? (
@@ -316,7 +316,7 @@ export default function HomePage() {
                           2023.9-2025.8
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px]">
+                      <div className="text-muted-foreground leading-relaxed min-h-[100px] max-h-[200px] overflow-y-auto">
                         {loadingTexts["rightbrain"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("operations") || word.includes("founder") || word.includes("million-user") || word.includes("social") || word.includes("media") || word.includes("Discord") || word.includes("data") || word.includes("dashboard") || word.includes("Google") || word.includes("Ads") || word.includes("Vibe") || word.includes("Coding") || word.includes("pushing") || word.includes("boundaries") || word.includes("embracing") || word.includes("possibilities") ? (
