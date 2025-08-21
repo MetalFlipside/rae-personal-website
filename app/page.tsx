@@ -150,7 +150,7 @@ export default function HomePage() {
                     }
                     return <span key={idx}>{part}</span>;
                   })}
-                  <span className="inline-block w-2 h-8 bg-foreground align-middle animate-blink ml-1" />
+                  {/* 光标已移除 */}
                 </h1>
                 <p className="text-xl text-gray-400 leading-relaxed">
                   {/* Typewriter effect with bold highlights */}
@@ -160,7 +160,7 @@ export default function HomePage() {
                     }
                     return <span key={idx}>{part}</span>;
                   })}
-                  <span className="inline-block w-2 h-6 bg-gray-400 align-middle animate-blink ml-1" />
+                  {/* 光标已移除 */}
                 </p>
               </div>
 
