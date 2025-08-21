@@ -232,7 +232,7 @@ export default function HomePage() {
                 <div className="relative flex items-start space-x-8">
                   <img src="/36Kr.JPG" alt="36Kr Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
                   <Card 
-                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow"
+                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                     onMouseEnter={() =>
                       handleCompanyHover(
                         "36kr",
@@ -248,7 +248,7 @@ export default function HomePage() {
                           2022.9-2023.1
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px] max-h-[200px] overflow-y-auto">
+                      <div className="text-muted-foreground leading-relaxed min-h-[100px] transition-all duration-300" style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["36kr"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("independently") || word.includes("well-received") || word.includes("topic") || word.includes("planning") || word.includes("desk") || word.includes("research") || word.includes("interviews") || word.includes("writing") ? (
@@ -266,7 +266,7 @@ export default function HomePage() {
                 <div className="relative flex items-start space-x-8">
                   <img src="/ByteDance.JPG" alt="ByteDance Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
                   <Card 
-                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow"
+                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                     onMouseEnter={() =>
                       handleCompanyHover(
                         "bytedance",
@@ -282,7 +282,7 @@ export default function HomePage() {
                           2023.3-2023.6
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px] max-h-[200px] overflow-y-auto">
+                      <div className="text-muted-foreground leading-relaxed min-h-[100px] transition-all duration-300" style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["bytedance"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("insight") || word.includes("robust") || word.includes("structures") || word.includes("mature") || word.includes("workflows") || word.includes("knowledge") || word.includes("bases") ? (
@@ -300,7 +300,7 @@ export default function HomePage() {
                 <div className="relative flex items-start space-x-8">
                   <img src="/RightBrain.JPG" alt="RightBrain Logo" className="company-logo flex-shrink-0 w-16 h-16 rounded-full shadow-lg" />
                   <Card 
-                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow"
+                    className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                     onMouseEnter={() =>
                       handleCompanyHover(
                         "rightbrain",
@@ -316,7 +316,7 @@ export default function HomePage() {
                           2023.9-2025.8
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed min-h-[100px] max-h-[200px] overflow-y-auto">
+                      <div className="text-muted-foreground leading-relaxed min-h-[100px] transition-all duration-300" style={{ maxWidth: "100%", wordWrap: "break-word" }}>
                         {loadingTexts["rightbrain"]?.map((word, idx) => (
                           <span key={idx} className="mr-1">
                             {word.includes("operations") || word.includes("founder") || word.includes("million-user") || word.includes("social") || word.includes("media") || word.includes("Discord") || word.includes("data") || word.includes("dashboard") || word.includes("Google") || word.includes("Ads") || word.includes("Vibe") || word.includes("Coding") || word.includes("pushing") || word.includes("boundaries") || word.includes("embracing") || word.includes("possibilities") ? (
