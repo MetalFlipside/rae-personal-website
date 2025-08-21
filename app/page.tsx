@@ -7,20 +7,33 @@ import { Badge } from "@/components/ui/badge"
 import { ChevronDown, Mail, Linkedin, Instagram, ExternalLink, Briefcase, GraduationCap, Sparkles } from "lucide-react"
 
 export default function HomePage() {
-  // Typewriter effect for hero intro
-  // Typewriter effect for hero intro
+  // Typewriter effect for hero title and intro
+  const titleTextRaw = "Hi, this is Rae";
   const introTextRaw = "I graduated from Peking University in 2024 and have worked as a Growth Operations specialist at an AI startup in Haidian, Beijing, starting as an intern before becoming a full-time employee.";
+  const [typedTitle, setTypedTitle] = useState("");
   const [typedText, setTypedText] = useState("");
   useEffect(() => {
     let i = 0;
-    const type = () => {
-      if (i <= introTextRaw.length) {
-        setTypedText(introTextRaw.slice(0, i));
+    const typeTitle = () => {
+      if (i <= titleTextRaw.length) {
+        setTypedTitle(titleTextRaw.slice(0, i));
         i++;
-        setTimeout(type, 30);
+        setTimeout(typeTitle, 60);
       }
     };
-    type();
+    typeTitle();
+    // After title finishes, start intro after 3s
+    setTimeout(() => {
+      let j = 0;
+      const typeIntro = () => {
+        if (j <= introTextRaw.length) {
+          setTypedText(introTextRaw.slice(0, j));
+          j++;
+          setTimeout(typeIntro, 30);
+        }
+      };
+      typeIntro();
+    }, titleTextRaw.length * 60 + 3000); // 3s after title
     return () => {};
   }, []);
   const [isLoading, setIsLoading] = useState(true)
@@ -130,7 +143,14 @@ export default function HomePage() {
                   AI & Growth Operations Specialist
                 </Badge>
                 <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                  Hi, this is <span className="text-primary">Rae</span>
+                  {/* Typewriter effect for title, Rae高亮 */}
+                  {typedTitle.split(/(Rae)/g).map((part, idx) => {
+                    if (part === "Rae") {
+                      return <span key={idx} className="text-primary">{part}</span>;
+                    }
+                    return <span key={idx}>{part}</span>;
+                  })}
+                  <span className="inline-block w-2 h-8 bg-foreground align-middle animate-blink ml-1" />
                 </h1>
                 <p className="text-xl text-gray-400 leading-relaxed">
                   {/* Typewriter effect with bold highlights */}
@@ -140,7 +160,7 @@ export default function HomePage() {
                     }
                     return <span key={idx}>{part}</span>;
                   })}
-                  <span className="inline-block w-2 h-6 bg-white align-middle animate-blink ml-1" />
+                  <span className="inline-block w-2 h-6 bg-gray-400 align-middle animate-blink ml-1" />
                 </p>
               </div>
 
