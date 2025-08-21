@@ -227,18 +227,8 @@ export default function HomePage() {
               <div className="space-y-12">
                 {/* 36Kr */}
                 <div className="relative flex items-start space-x-8">
-                  <div
-                    className="company-logo flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
-                    style={{ backgroundColor: "#3B82F6" }}
-                    onMouseEnter={() =>
-                      handleCompanyHover(
-                        "36kr",
-                        "During my internship at 36Kr, I worked as a content intern focusing on overseas business articles within a startup media team. With significant creative freedom from my supervisor, I independently completed two well-received articles, mastering everything from topic planning and desk research to interviews and writing. This experience honed my market research and resource integration skills and sparked a deep interest in global business.",
-                      )
-                    }
-                    onMouseLeave={() => handleCompanyLeave("36kr")}
-                  >
-                    <Briefcase className="w-8 h-8 text-white" />
+                  <div className="company-logo flex-shrink-0 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl">
+                    <img src="/36Kr.JPG" alt="36Kr Logo" className="w-full h-full object-cover rounded-full" />
                   </div>
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
@@ -248,29 +238,14 @@ export default function HomePage() {
                           2022.9-2023.1
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed">
-                        <p>
-                          <strong className="font-bold text-orange-500">I independently completed two well-received articles, mastering everything from topic planning and desk research to interviews and writing.</strong>
-                        </p>
-                      </div>
                     </CardContent>
                   </Card>
                 </div>
 
                 {/* ByteDance */}
                 <div className="relative flex items-start space-x-8">
-                  <div
-                    className="company-logo flex-shrink-0 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
-                    style={{ backgroundColor: "#F97316" }}
-                    onMouseEnter={() =>
-                      handleCompanyHover(
-                        "bytedance",
-                        "Curious about big tech, I joined ByteDance as a content operations intern for Toutiao's encyclopedia business. The role gave me insight into large corporations, with their robust structures, mature workflows, and vast knowledge bases. However, the intern tasks were highly fragmented, requiring strict adherence to SOPs with little room for creativity, even in planning activities. I felt like a cog in a machine, unsure of my impact, which led me to consider leaving the corporate world.",
-                      )
-                    }
-                    onMouseLeave={() => handleCompanyLeave("bytedance")}
-                  >
-                    <GraduationCap className="w-8 h-8 text-white" />
+                  <div className="company-logo flex-shrink-0 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl">
+                    <img src="/ByteDance.JPG" alt="ByteDance Logo" className="w-full h-full object-cover rounded-full" />
                   </div>
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
@@ -280,32 +255,14 @@ export default function HomePage() {
                           2023.3-2023.6
                         </Badge>
                       </div>
-                      <div className="text-muted-foreground leading-relaxed">
-                        <p>
-                          <strong className="font-bold text-orange-500">The role gave me insight into large corporations, with their robust structures, mature workflows, and vast knowledge bases.</strong>
-                        </p>
-                        <p>
-                          <strong className="font-bold text-orange-500">I felt like a cog in a machine, unsure of my impact, which led me to consider leaving the corporate world.</strong>
-                        </p>
-                      </div>
                     </CardContent>
                   </Card>
                 </div>
 
                 {/* RightBrain AI */}
                 <div className="relative flex items-start space-x-8">
-                  <div
-                    className="company-logo flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl"
-                    style={{ backgroundColor: "#3B82F6" }}
-                    onMouseEnter={() =>
-                      handleCompanyHover(
-                        "rightbrain",
-                        "Later, a serendipitous opportunity brought me to RightBrain AI as a startup fresh off its angel round, where I was the only intern in the operations team, reporting directly to the founder. As the team grew with like-minded colleagues, the environment buzzed with energy and creativity. I contributed to the cold launch of a million-user AIGC creation tool, managed social media accounts on X, Instagram, TikTok, and the official Discord community, built my first data dashboard while learning SQL, connected with global users, self-taught Google Ads via YouTube to run my first ad account, wrote plots for growth campaigns, and even learned Vibe Coding to create event pages. This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape.",
-                      )
-                    }
-                    onMouseLeave={() => handleCompanyLeave("rightbrain")}
-                  >
-                    <Sparkles className="w-8 h-8 text-white" />
+                  <div className="company-logo flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:shadow-xl">
+                    <img src="/RightBrain.JPG" alt="RightBrain Logo" className="w-full h-full object-cover rounded-full" />
                   </div>
                   <Card className="timeline-content flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
@@ -314,32 +271,6 @@ export default function HomePage() {
                         <Badge variant="secondary" style={{ backgroundColor: "#F97316", color: "white" }}>
                           2023.9-2025.8
                         </Badge>
-                      </div>
-                      <div className="text-muted-foreground leading-relaxed">
-                        <p>
-                          <strong className="font-bold text-orange-500">where I was the only intern in the operations team, reporting directly to the founder.</strong>
-                        </p>
-                        <p>
-                          <strong className="font-bold text-orange-500">million-user AIGC creation tool</strong>
-                        </p>
-                        <p>
-                          <strong className="font-bold text-orange-500">social media accounts</strong>
-                        </p>
-                        <p>
-                          <strong className="font-bold text-orange-500">the official Discord community</strong>
-                        </p>
-                        <p>
-                          <strong className="font-bold text-orange-500">first data dashboard</strong>
-                        </p>
-                        <p>
-                          <strong className="font-bold text-orange-500">Google Ads</strong>
-                        </p>
-                        <p>
-                          <strong className="font-bold text-orange-500">Vibe Coding</strong>
-                        </p>
-                        <p>
-                          <strong className="font-bold text-orange-500">This rapid growth fueled my passion for AI product growth—nothing excites me more than pushing my boundaries and embracing the possibilities of the unpredictable AI landscape.</strong>
-                        </p>
                       </div>
                     </CardContent>
                   </Card>
