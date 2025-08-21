@@ -8,20 +8,20 @@ import { ChevronDown, Mail, Linkedin, Instagram, ExternalLink, Briefcase, Gradua
 
 export default function HomePage() {
   // Typewriter effect for hero intro
-  const introText = `I graduated from **Peking University** in 2024 and have worked as a **Growth Operations** specialist at an AI startup in Haidian, Beijing, starting as an intern before becoming a full-time employee.`;
+  // Typewriter effect for hero intro
+  const introTextRaw = "I graduated from Peking University in 2024 and have worked as a Growth Operations specialist at an AI startup in Haidian, Beijing, starting as an intern before becoming a full-time employee.";
   const [typedText, setTypedText] = useState("");
   useEffect(() => {
     let i = 0;
-    let timer: NodeJS.Timeout;
-    function type() {
-      if (i <= introText.length) {
-        setTypedText(introText.slice(0, i));
+    const type = () => {
+      if (i <= introTextRaw.length) {
+        setTypedText(introTextRaw.slice(0, i));
         i++;
-        timer = setTimeout(type, 30);
+        setTimeout(type, 30);
       }
-    }
+    };
     type();
-    return () => clearTimeout(timer);
+    return () => {};
   }, []);
   const [isLoading, setIsLoading] = useState(true)
   const [visibleSections, setVisibleSections] = useState<string[]>([])
@@ -134,11 +134,12 @@ export default function HomePage() {
                 </h1>
                 <p className="text-xl text-white leading-relaxed">
                   {/* Typewriter effect with bold highlights */}
-                  <span dangerouslySetInnerHTML={{
-                    __html: typedText
-                      .replace(/\*\*Peking University\*\*/g, '<strong class="font-bold text-orange-500">Peking University</strong>')
-                      .replace(/\*\*Growth Operations\*\*/g, '<strong class="font-bold text-orange-500">Growth Operations</strong>')
-                  }} />
+                  {typedText.split(/(Peking University|Growth Operations)/g).map((part, idx) => {
+                    if (part === "Peking University" || part === "Growth Operations") {
+                      return <strong key={idx} className="font-bold text-orange-500">{part}</strong>;
+                    }
+                    return <span key={idx}>{part}</span>;
+                  })}
                   <span className="inline-block w-2 h-6 bg-white align-middle animate-blink ml-1" />
                 </p>
               </div>
