@@ -74,7 +74,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-orange-100">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
@@ -163,7 +163,7 @@ export default function HomePage() {
                 src="/headshot-1.JPG"
                 alt="Rae's Profile"
                 className="relative z-10 w-full h-full object-cover rounded-full border-4 border-background shadow-2xl object-center"
-                style={{ objectPosition: "60% center" }} // 适当调整百分比
+                style={{ objectPosition: "10% center" }} // 适当调整百分比
               />
             </div>
           </div>
