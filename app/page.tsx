@@ -226,7 +226,7 @@ export default function HomePage() {
                   </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="/Rae_Resume.pdf" download="Rae_Resume.pdf" aria-label="Download Rae resume PDF">
+                  <a href="/rae-resume.pdf" download="rae-resume.pdf" aria-label="Download Rae resume PDF">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Download Resume
                   </a>
