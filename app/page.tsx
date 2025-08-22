@@ -175,9 +175,9 @@ export default function HomePage() {
               </a>
             </div>
             <Button asChild variant="outline" size="sm">
-              <a href="https://www.linkedin.com/in/rae-ji-218989303/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn Profile">
-                <Linkedin className="w-4 h-4 mr-2" />
-                Connect on LinkedIn
+              <a href="mailto:jirey3379@gmail.com" aria-label="Email Rae">
+                <Mail className="w-4 h-4 mr-2" />
+                Contact
               </a>
             </Button>
           </div>
@@ -226,9 +226,9 @@ export default function HomePage() {
                   </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="/rae-resume.pdf" download="rae-resume.pdf" aria-label="Download Rae resume PDF">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Download Resume
+                  <a href="https://www.linkedin.com/in/rae-ji-218989303/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn Profile">
+                    <Linkedin className="w-4 h-4 mr-2" />
+                    Connect on LinkedIn
                   </a>
                 </Button>
               </div>
